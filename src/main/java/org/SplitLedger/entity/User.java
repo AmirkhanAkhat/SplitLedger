@@ -28,8 +28,6 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
 
     @Column(nullable = false)
     private String password;
