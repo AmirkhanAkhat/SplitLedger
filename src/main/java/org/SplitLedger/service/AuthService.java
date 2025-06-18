@@ -52,9 +52,10 @@ public class AuthService {
             throw new IllegalArgumentException("Incorrect password.");
         }
 
-        String jwtToken = jwtUtil.generateToken(user.getUsername());
+        String accessToken = jwtUtil.generateAccessToken(user.getUsername());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
 
-        return new LoginResponse(jwtToken, user.getId(), user.getUsername(), loginDTO.getEmail());
+        return new LoginResponse(accessToken, refreshToken, user.getId(), user.getUsername(), loginDTO.getEmail());
     }
 
 }
