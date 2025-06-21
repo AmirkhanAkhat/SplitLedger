@@ -15,6 +15,7 @@ public class DashBoardDTO {
     private BigDecimal totalOwed;
     private BigDecimal totalLent;
     private List<DebtDTO> debts;
+    private List<DebtorDTO> debtors;
     private List<ReminderDTO> reminders;
     private List<GroupDTO> groups;
 }
