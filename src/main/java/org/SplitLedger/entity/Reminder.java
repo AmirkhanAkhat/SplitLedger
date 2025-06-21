@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class Reminder {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
