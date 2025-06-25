@@ -3,6 +3,7 @@ package org.SplitLedger.repository;
 
 import org.SplitLedger.entity.Debt;
 import org.SplitLedger.entity.User;
+import org.SplitLedger.entity.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,8 @@ public interface DebtRepository extends JpaRepository<Debt, Long> {
 
     // Другие должны мне
     List<Debt> findAllByLender(User lender);
+
+    long countByBorrowerAndStatusNot(User borrower, Status status);
+
+    long countByLenderAndStatusNot(User lender, Status status);
 }

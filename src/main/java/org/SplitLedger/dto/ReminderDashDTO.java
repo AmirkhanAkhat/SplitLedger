@@ -8,7 +8,7 @@ import org.SplitLedger.entity.enums.ReminderStatus;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReminderDTO {
+public class ReminderDashDTO {
     private String message;
     private ReminderStatus status;
 }
