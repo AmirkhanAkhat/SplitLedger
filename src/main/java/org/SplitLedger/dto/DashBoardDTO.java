@@ -14,8 +14,8 @@ public class DashBoardDTO {
     private String email;
     private BigDecimal totalOwed;
     private BigDecimal totalLent;
-    private List<DebtDTO> debts;
-    private List<DebtorDTO> debtors;
-    private List<ReminderDTO> reminders;
-    private List<GroupDTO> groups;
+    private List<DebtDashDTO> debts;
+    private List<DebtorDashDTO> debtors;
+    private List<ReminderDashDTO> reminders;
+    private List<GroupDashDTO> groups;
 }
