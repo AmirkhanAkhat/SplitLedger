@@ -1,7 +1,7 @@
 package org.SplitLedger.service;
 
 import lombok.RequiredArgsConstructor;
-import org.SplitLedger.dto.*;
+import org.SplitLedger.dto.dashboard.*;
 import org.SplitLedger.entity.*;
 import org.SplitLedger.entity.enums.Status;
 import org.SplitLedger.repository.*;
@@ -69,7 +69,7 @@ public class DashBoardService {
         );
     }
 
-    public DebtResponse getDebts(String username) {
+    public DebtListResponse getDebts(String username) {
         User user = userRepository.findByUsername(username);
 
         List<Debt> borrowedDebts = debtRepository.findAllByBorrower(user);
@@ -89,11 +89,11 @@ public class DashBoardService {
         BigDecimal totalOwed = calculateTotalAmount(borrowedDebts);
         long totalActiveDebts = debtRepository.countByBorrowerAndStatusNot(user, Status.PAID);
 
-        return new DebtResponse(totalOwed, totalActiveDebts, debts);
+        return new DebtListResponse(totalOwed, totalActiveDebts, debts);
     }
 
 
-    public DebtorResponse getDebtors(String username) {
+    public DebtorListResponse getDebtors(String username) {
         User user = userRepository.findByUsername(username);
 
         List<Debt> lendedDebts = debtRepository.findAllByLender(user);
@@ -113,7 +113,7 @@ public class DashBoardService {
         BigDecimal totalLent = calculateTotalAmount(lendedDebts);
         long totalActiveLend = debtRepository.countByLenderAndStatusNot(user, Status.PAID);
 
-        return new DebtorResponse(totalLent, totalActiveLend, debtors);
+        return new DebtorListResponse(totalLent, totalActiveLend, debtors);
     }
 
     private BigDecimal calculateTotalAmount(List<Debt> debts) {

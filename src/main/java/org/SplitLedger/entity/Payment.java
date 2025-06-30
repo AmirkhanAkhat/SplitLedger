@@ -23,7 +23,6 @@ public class Payment {
     @Column(nullable = false)
     private BigDecimal amount;
 
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Method method;

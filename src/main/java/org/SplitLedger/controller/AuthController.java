@@ -2,7 +2,7 @@ package org.SplitLedger.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.SplitLedger.config.JwtUtil;
-import org.SplitLedger.dto.*;
+import org.SplitLedger.dto.auth.*;
 import org.SplitLedger.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

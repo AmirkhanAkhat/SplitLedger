@@ -1,4 +1,4 @@
-package org.SplitLedger.dto;
+package org.SplitLedger.dto.dashboard;
 
 
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class DebtResponse {
+public class DebtListResponse {
     private BigDecimal totalOwed;
     private long totalActiveDebts;
     private List<DebtDTO> debts;

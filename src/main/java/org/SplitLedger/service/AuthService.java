@@ -2,15 +2,17 @@ package org.SplitLedger.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.SplitLedger.config.JwtUtil;
-import org.SplitLedger.dto.LoginDTO;
-import org.SplitLedger.dto.LoginResponse;
-import org.SplitLedger.dto.RegisterDTO;
-import org.SplitLedger.dto.RegisterResponse;
+import org.SplitLedger.dto.auth.LoginDTO;
+import org.SplitLedger.dto.auth.LoginResponse;
+import org.SplitLedger.dto.auth.RegisterDTO;
+import org.SplitLedger.dto.auth.RegisterResponse;
 import org.SplitLedger.entity.User;
 import org.SplitLedger.repository.UserRepository;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -45,7 +47,13 @@ public class AuthService {
             throw new IllegalArgumentException("No such user");
         }
 
-        User user = userRepository.findByEmail(loginDTO.getEmail());
+        Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
+
+        if (optionalUser.isEmpty()) {
+            throw new UsernameNotFoundException("Not Found");
+        }
+
+        User user = optionalUser.get();
 
         if(!encoder.matches(loginDTO.getPassword(), user.getPassword())) {
             log.info("Incorrect password. Retype again!");

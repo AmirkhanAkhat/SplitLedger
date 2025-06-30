@@ -1,4 +1,4 @@
-package org.SplitLedger.dto;
+package org.SplitLedger.dto.dashboard;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

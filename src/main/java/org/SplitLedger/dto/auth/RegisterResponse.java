@@ -1,4 +1,4 @@
-package org.SplitLedger.dto;
+package org.SplitLedger.dto.auth;
 
 
 import lombok.AllArgsConstructor;
