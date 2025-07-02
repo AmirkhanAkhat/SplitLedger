@@ -42,15 +42,12 @@ public class AuthService {
 
 
     public LoginResponse login(LoginDTO loginDTO) {
-        if (!userRepository.existsByEmail(loginDTO.getEmail())) {
-            log.info("There is no existing user with such {} email. Please sign up for new account or log in with existing one.", loginDTO.getEmail());
-            throw new IllegalArgumentException("No such user");
-        }
 
         Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
 
         if (optionalUser.isEmpty()) {
-            throw new UsernameNotFoundException("Not Found");
+            log.info("There is no existing user with such {} email. Please sign up for new account or log in with existing one.", loginDTO.getEmail());
+            throw new IllegalArgumentException("No such user");
         }
 
         User user = optionalUser.get();
@@ -63,7 +60,7 @@ public class AuthService {
         String accessToken = jwtUtil.generateAccessToken(user.getUsername());
         String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
 
-        return new LoginResponse(accessToken, refreshToken, user.getId(), user.getUsername(), loginDTO.getEmail());
+        return new LoginResponse(accessToken, refreshToken, user.getId(), user.getUsername(), user.getEmail());
     }
 
 }

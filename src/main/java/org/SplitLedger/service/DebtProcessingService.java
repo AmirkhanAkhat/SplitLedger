@@ -2,7 +2,7 @@ package org.SplitLedger.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.SplitLedger.dto.debts.DResponse;
+import org.SplitLedger.dto.APIResponse;
 import org.SplitLedger.dto.debts.DebtRequest;
 import org.SplitLedger.dto.debts.DebtorRequest;
 import org.SplitLedger.entity.Debt;
@@ -26,16 +26,16 @@ public class DebtProcessingService {
     private final GroupSplitMemberRepository groupSplitMemberRepository;
     private final UserRepository userRepository;
 
-    public DResponse createDebtor(String lenderUsername, DebtorRequest debtorRequest) {
+    public APIResponse createDebtor(String lenderUsername, DebtorRequest debtorRequest) {
 
         Optional<User> borrower = userRepository.findByEmail(debtorRequest.getBorrowerEmail());
         if (borrower.isEmpty()) {
-            return new DResponse(false, "NO SUCH USER");
+            return new APIResponse(false, "NO SUCH USER");
         }
 
         User lender = userRepository.findByUsername(lenderUsername);
         if (lender == null) {
-            return new DResponse(false, "NO SUCH LENDER");
+            return new APIResponse(false, "NO SUCH LENDER");
         }
 
         Debt debt = new Debt();
@@ -49,19 +49,19 @@ public class DebtProcessingService {
 
         debtRepository.save(debt);
 
-        return new DResponse(true);
+        return new APIResponse(true);
     }
 
 
-    public DResponse createDebt(String borrowerUsername, DebtRequest debtRequest) {
+    public APIResponse createDebt(String borrowerUsername, DebtRequest debtRequest) {
         Optional<User> borrower = userRepository.findByEmail(borrowerUsername);
         if (borrower.isEmpty()) {
-            return new DResponse(false, "NO SUCH USER");
+            return new APIResponse(false, "NO SUCH USER");
         }
 
         User lender = userRepository.findByUsername(debtRequest.getLenderEmail());
         if (lender == null) {
-            return new DResponse(false, "NO SUCH LENDER");
+            return new APIResponse(false, "NO SUCH LENDER");
         }
 
         Debt debt = new Debt();
@@ -77,6 +77,6 @@ public class DebtProcessingService {
         debtRepository.save(debt);
 
 
-        return new DResponse(true);
+        return new APIResponse(true);
     }
 }

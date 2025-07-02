@@ -57,7 +57,6 @@ public class Debt {
 
     private String description;
 
-
     @Column(name = "paid_at")
     private LocalDateTime paidAt;
 

@@ -4,7 +4,9 @@ package org.SplitLedger.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.SplitLedger.entity.enums.Currency;
 import org.SplitLedger.entity.enums.Method;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,6 +29,11 @@ public class Payment {
     @Column(nullable = false)
     private Method method;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Currency currency;
+
+    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime paymentDate;
 
@@ -41,5 +48,7 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "to_user_id", nullable = false)
     private User toUser;
+
+    private String description;
 }
 
